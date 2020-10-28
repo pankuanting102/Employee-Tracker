@@ -330,7 +330,7 @@ function updateEmployeeManager(){
 function viewBudgetByDepartment(){
   
         connection.query(
-            "select department, sum(salary) AS Total_Budget from employee group by department",
+            "select department, sum(salary) AS total_salary from employee group by department",
             
             function (err, res) {
               if (err) throw err;

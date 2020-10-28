@@ -8,6 +8,8 @@ An employee management application created by node.js, inquirer and mysql packag
 <br>
 <br><b>Walkthrough Video:</b>
 <br>https://drive.google.com/file/d/1P_aMlr61Wutuiak2m5jnbhFkagi_-n5u/view?usp=sharing
+
+<br>
 <br><div style="width: 90vw; margin: auto; border: 1px black solid">
 <img src="https://github.com/pankuanting102/Employee-Tracker/blob/master/asset/12_employee_tracker_walkthrough.gif?raw=true">
 </div>

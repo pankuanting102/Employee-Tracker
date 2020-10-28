@@ -32,6 +32,7 @@ connection.connect(function (err) {
         "Remove Employee",
         "Update Employee's Role",
         "Update Employee's Manager",
+        "View the total utilized budget by department",
         "EXIT"],
       })
       .then((result) => {
@@ -47,14 +48,16 @@ connection.connect(function (err) {
         } else if (result.choice === "Add Employee") {
          
           addEmployee();
-        } else if (result.choice === "Update Employee Role"){
+        } else if (result.choice === "Update Employee's Role"){
             updateEmployeeRole();
         } else if (result.choice === "Update Employee's Manager"){
           updateEmployeeManager();
         
         } else if (result.choice === "Remove Employee"){
             removeEmployee(); 
-        }
+        }  else if (result.choice === "View the total utilized budget by department"){
+          viewBudgetByDepartment(); 
+      }
         
         else {
           connection.end();
@@ -80,7 +83,7 @@ connection.query(
     }
   );
   }
-
+// view all employee by Department function 
   function viewByDepartment() {
     inquirer
     .prompt({
@@ -89,7 +92,7 @@ connection.query(
       type: "list",
       choices: [
       "Sales",
-      "Enginnering",
+      "Engineering",
       "Finance",
       "Legal"],
      }).then((result)=>{
@@ -106,7 +109,7 @@ connection.query(
 
     })
   }
-
+// view all employee by Manager function 
   function viewByManager() {
     inquirer
     .prompt({
@@ -133,8 +136,7 @@ connection.query(
 
   }
 
-
-
+// add employee function 
  function addEmployee(){
     inquirer
     .prompt([{
@@ -159,7 +161,7 @@ connection.query(
         type: "list",
         choices: [
         "Sales",
-        "Enginnering",
+        "Engineering",
         "Finance",
         "Legal"],
      },
@@ -198,7 +200,7 @@ connection.query(
       })
 
   }
-
+// remove employee function 
   function removeEmployee() {
 
     connection.query("SELECT * FROM employee", function (err, rows) {
@@ -234,7 +236,7 @@ connection.query(
 })
   }
 
-
+// update employee role function 
 function updateEmployeeRole() {
   connection.query("SELECT * FROM employee", function (err, rows) {
     inquirer
@@ -276,7 +278,7 @@ function updateEmployeeRole() {
   })
 })
 }
-
+// update employee manager function 
 function updateEmployeeManager(){
   connection.query("SELECT * FROM employee", function (err, rows) {
     inquirer
@@ -323,6 +325,21 @@ function updateEmployeeManager(){
         })
   })
 })
+}
+
+function viewBudgetByDepartment(){
+  
+        connection.query(
+            "select department, sum(salary) AS Total_Budget from employee group by department",
+            
+            function (err, res) {
+              if (err) throw err;
+              console.table(res);
+              start();
+            }
+          );
+
+  
 }
 
 
